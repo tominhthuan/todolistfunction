@@ -1,21 +1,30 @@
-import React from 'react'
-import Todos from './Todos'
+// TodoList.js
+import React, { useMemo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { clickItem, deleteTodo, setSelectedTodo } from '../redux/actions';
+import Todos from './Todos';
 
-function TodoList({ todos, clickItem, deleteTodo, setSelectedTodo, filter }) {
+function TodoList() {
+    const todos = useSelector((state) => state.todos);
+    const filter = useSelector((state) => state.filter);
+    const dispatch = useDispatch();
+
     const handleEditTodo = (id) => {
         const selectedTodo = todos.find((todo) => todo.id === id);
-        setSelectedTodo(selectedTodo);
-    }
+        dispatch(setSelectedTodo(selectedTodo));
+    };
 
-    const filteredTodos = todos.filter((todo) => {
-        if (filter === 'completed') {
-            return todo.isCompleted;
-        } else if (filter === 'active') {
-            return !todo.isCompleted;
-        } else {
-            return true;
-        }
-    });
+    const filteredTodos = useMemo(() => {
+        return todos.filter((todo) => {
+            if (filter === 'completed') {
+                return todo.isCompleted;
+            } else if (filter === 'active') {
+                return !todo.isCompleted;
+            } else {
+                return true;
+            }
+        });
+    }, [todos, filter]);
 
     return (
         <div>
@@ -25,10 +34,9 @@ function TodoList({ todos, clickItem, deleteTodo, setSelectedTodo, filter }) {
                     item={item}
                     id={item.id}
                     index={index}
-                    clickItem={clickItem}
-                    deleteTodo={deleteTodo} // Truyền hàm deleteTodo xuống component Todos
+                    clickItem={(id) => dispatch(clickItem(id))}
+                    deleteTodo={(id) => dispatch(deleteTodo(id))}
                     handleEditTodo={handleEditTodo}
-
                 />
             ))}
         </div>
@@ -36,5 +44,3 @@ function TodoList({ todos, clickItem, deleteTodo, setSelectedTodo, filter }) {
 }
 
 export default TodoList;
-
-

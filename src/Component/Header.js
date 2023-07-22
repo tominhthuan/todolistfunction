@@ -1,36 +1,32 @@
-import React, { useState, useEffect } from 'react'
+// Header.js
+import React, { useState, useRef, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTodo, updateTodo } from '../redux/actions';
 
-function Header({ addTodo, selectedTodo, updateTodo }) {
-    const [inputTodo, setInputTodo] = useState(''); //lưu trữ giá trị input vừa nhập
+function Header() {
+    const [inputTodo, setInputTodo] = useState('');
+    const selectedTodo = useSelector((state) => state.selectedTodo);
+    const inputRef = useRef(null);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (selectedTodo) {
-            setInputTodo(selectedTodo.name)
+            setInputTodo(selectedTodo.name);
         } else {
             setInputTodo('');
         }
+        inputRef.current.focus();
     }, [selectedTodo]);
 
-
-    // const handleAddTodo = () => {
-    //     if (inputTodo.trim() !== "") {
-    //         addTodo(inputTodo);
-    //         setInputTodo('');
-    //     }
-    // }
     const handleAddTodo = () => {
         if (inputTodo.trim() !== '') {
             if (selectedTodo) {
-                // Nếu selectedTodo tồn tại, gọi hàm updateTodo
-                updateTodo({
-                    ...selectedTodo,
-                    name: inputTodo,
-                });
+                dispatch(updateTodo({ ...selectedTodo, name: inputTodo }));
             } else {
-                // Ngược lại, gọi hàm addTodo
-                addTodo(inputTodo);
+                dispatch(addTodo(inputTodo));
             }
             setInputTodo('');
+            inputRef.current.focus();
         }
     };
 
@@ -46,19 +42,13 @@ function Header({ addTodo, selectedTodo, updateTodo }) {
                 type='text'
                 value={inputTodo}
                 onChange={handleInputChange}
+                ref={inputRef}
             />
-            <button
-                className='handleAddTodo'
-                onClick={handleAddTodo}
-            >
-                {selectedTodo ? "Save Todo " : "Add Todos"}
-
+            <button className='handleAddTodo' onClick={handleAddTodo}>
+                {selectedTodo ? 'Lưu Todo' : 'Thêm Todos'}
             </button>
         </div>
-    )
+    );
 }
 
-export default Header
-
-
-
+export default Header;

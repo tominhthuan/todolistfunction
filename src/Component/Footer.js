@@ -1,11 +1,13 @@
+// Footer.js
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { setFilter } from '../redux/actions';
 
-function Footer({ setFilter }) {
-
-
+function Footer() {
+    const dispatch = useDispatch();
 
     const handleFilterChange = (filterType) => {
-        setFilter(filterType);
+        dispatch(setFilter(filterType));
     };
 
     return (
@@ -16,4 +18,5 @@ function Footer({ setFilter }) {
         </div>
     );
 }
+
 export default Footer;

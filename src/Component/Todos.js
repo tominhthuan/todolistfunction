@@ -14,7 +14,7 @@ function Todos({ item, deleteTodo, clickItem, id, handleEditTodo }) {
         deleteTodo(id);
     };
     const handleEditClick = () => {
-        handleEditTodo(id);
+        handleEditTodo(item.id);
     };
     return (
         <div className="TodoList">
