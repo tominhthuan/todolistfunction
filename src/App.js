@@ -13,6 +13,7 @@ function App() {
         <Header />
         <TodoList />
         <Footer />
+
       </div>
     </Provider>
   );

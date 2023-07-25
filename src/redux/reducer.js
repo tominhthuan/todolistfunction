@@ -5,9 +5,18 @@ const initialState = {
     filter: 'all',
 };
 
+export const ACTION_TYPE = {
+    ADD_TODO: 'ADD_TODO',
+    UPDATE_TODO: 'UPDATE_TODO',
+    DELETE_TODO: 'DELETE_TODO',
+    CLICK_ITEM: 'CLICK_ITEM',
+    SET_SELECTED_TODO: 'SET_SELECTED_TODO',
+    SET_FILTER: 'SET_FILTER',
+
+};
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'ADD_TODO':
+        case ACTION_TYPE.ADD_TODO:
             return {
                 ...state,
                 todos: [...state.todos, action.payload],
@@ -21,7 +30,7 @@ const rootReducer = (state = initialState, action) => {
         //         todos: updatedTodos,
         //         selectedTodo: null,
         //     };
-        case 'UPDATE_TODO': {
+        case ACTION_TYPE.UPDATE_TODO: {
             const index = state.todos.findIndex((todo) => todo.id === action.payload.id);
             if (index !== -1) {
                 const updatedTodos = [...state.todos];
@@ -38,7 +47,7 @@ const rootReducer = (state = initialState, action) => {
                 return state;
             }
         }
-        case 'DELETE_TODO':
+        case ACTION_TYPE.DELETE_TODO:
             const filteredTodos = state.todos.filter((todo) => todo.id !== action.payload);
             return {
                 ...state,
@@ -52,7 +61,7 @@ const rootReducer = (state = initialState, action) => {
         //         ...state,
         //         todos: toggledTodos,
         //     };
-        case 'CLICK_ITEM': {
+        case ACTION_TYPE.CLICK_ITEM: {
             const index = state.todos.findIndex((todo) => todo.id === action.payload);
             if (index !== -1) {
                 // Tìm thấy chỉ mục của công việc cần thay đổi trạng thái
@@ -69,12 +78,12 @@ const rootReducer = (state = initialState, action) => {
                 return state;
             }
         }
-        case 'SET_SELECTED_TODO':
+        case ACTION_TYPE.SET_SELECTED_TODO:
             return {
                 ...state,
                 selectedTodo: action.payload,
             };
-        case 'SET_FILTER':
+        case ACTION_TYPE.SET_FILTER:
             return {
                 ...state,
                 filter: action.payload,
