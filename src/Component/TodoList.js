@@ -3,6 +3,7 @@ import React, { useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { clickItem, deleteTodo, setSelectedTodo } from '../redux/actions';
 import Todos from './Todos';
+import Pagination from './Pagination';
 
 function TodoList() {
     const todos = useSelector((state) => state.todos);
@@ -10,7 +11,7 @@ function TodoList() {
     const dispatch = useDispatch();
 
     const [currentPage, setCurrentPage] = useState(1);
-    const todosPerPage = 5;
+    const todosPerPage = 3;
 
 
 
@@ -48,20 +49,8 @@ function TodoList() {
                     handleEditTodo={handleEditTodo}
                 />
             ))}
-            <div className="pagination">
-                <button
-                    disabled={currentPage === 1}
-                    onClick={() => setCurrentPage(currentPage - 1)}
-                >
-                    Trang trước
-                </button>
-                <button
-                    disabled={indexOfLastTodo >= filteredTodos.length}
-                    onClick={() => setCurrentPage(currentPage + 1)}
-                >
-                    Trang sau
-                </button>
-            </div>
+
+            <Pagination setCurrentPage={setCurrentPage} />
         </div>
     );
 }
