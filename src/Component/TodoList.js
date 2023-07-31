@@ -1,24 +1,24 @@
-// TodoList.js
 import React, { useMemo, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { clickItem, deleteTodo, setSelectedTodo } from '../redux/actions';
+import { useSelector } from 'react-redux';
+// import { useDispatch } from '../context/dispatchContext';
+// import { clickItem, deleteTodo, setSelectedTodo } from '../redux/actions';
 import Todos from './Todos';
 import Pagination from './Pagination';
 
 function TodoList() {
     const todos = useSelector((state) => state.todos);
     const filter = useSelector((state) => state.filter);
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     const [currentPage, setCurrentPage] = useState(1);
     const todosPerPage = 3;
 
 
 
-    const handleEditTodo = (id) => {
-        const selectedTodo = todos.find((todo) => todo.id === id);
-        dispatch(setSelectedTodo(selectedTodo));
-    };
+    // const handleEditTodo = (id) => {
+    //     const selectedTodo = todos.find((todo) => todo.id === id);
+    //     dispatch(setSelectedTodo(selectedTodo));
+    // };
 
     const filteredTodos = useMemo(() => {
         return todos.filter((todo) => {
@@ -44,9 +44,9 @@ function TodoList() {
                     item={item}
                     id={item.id}
                     index={index}
-                    clickItem={(id) => dispatch(clickItem(id))}
-                    deleteTodo={(id) => dispatch(deleteTodo(id))}
-                    handleEditTodo={handleEditTodo}
+                // clickItem={(id) => dispatch(clickItem(id))}
+                // deleteTodo={(id) => dispatch(deleteTodo(id))}
+                // handleEditTodo={handleEditTodo}
                 />
             ))}
 

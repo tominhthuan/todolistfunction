@@ -1,5 +1,5 @@
 // actions.js
-import { ACTION_TYPE } from "./reducer";
+import { ACTION_TYPE } from './type';
 
 let nextTodoId = 0;
 

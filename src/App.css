@@ -60,6 +60,7 @@ position: relative;
   align-items: flex-end;
   justify-content: space-between;
 }
+
 .header input {
   width: 100%;
   font-size: 24px;

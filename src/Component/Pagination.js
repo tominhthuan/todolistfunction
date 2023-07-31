@@ -9,16 +9,16 @@ export default function Pagination({ setCurrentPage }) {
 
     const pageNumbers = [];
     for (let i = 1; i <= totalPages; i++) {
-        pageNumbers.push(i);
+        pageNumbers.push(
+            <button key={i} onClick={() => setCurrentPage(i)}>
+                {i}
+            </button>
+        );
     }
 
     return (
         <div className="pagination">
-            {pageNumbers.map((pageNumber) => (
-                <button key={pageNumber} onClick={() => setCurrentPage(pageNumber)}>
-                    {pageNumber}
-                </button>
-            ))}
+            {pageNumbers}
         </div>
     );
 }

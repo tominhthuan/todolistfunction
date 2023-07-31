@@ -1,7 +1,8 @@
 // Header.js
 import React, { useState, useRef, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { addTodo, updateTodo } from '../redux/actions';
+import { useDispatch } from '../context/dispatchContext';
 
 function Header() {
     const [inputTodo, setInputTodo] = useState('');
