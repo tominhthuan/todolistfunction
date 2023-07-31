@@ -1,4 +1,3 @@
-// rootReducer.js
 import { combineReducers } from 'redux';
 import todosreducer from './todosreducer';
 import selectedreducer from './selectedreducer';

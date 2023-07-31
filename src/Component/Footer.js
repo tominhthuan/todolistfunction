@@ -1,4 +1,3 @@
-// Footer.js
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setFilter } from '../redux/actions';

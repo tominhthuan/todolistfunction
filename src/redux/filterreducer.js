@@ -1,4 +1,3 @@
-// filterReducer.js
 import { ACTION_TYPE } from './type';
 
 const filterreducer = (state = 'all', action) => {

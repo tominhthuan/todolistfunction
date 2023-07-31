@@ -1,4 +1,4 @@
-// todosReducer.js
+
 import { ACTION_TYPE } from './type';
 
 const todosreducer = (state = [], action) => {
