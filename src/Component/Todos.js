@@ -1,15 +1,12 @@
-
 import React from 'react';
 import { connect } from 'react-redux';
 import { clickItem, deleteTodo, setSelectedTodo } from '../redux/actions';
-
 
 //img
 import checkImg from '../img/checked.png';
 import checkMarkImg from '../img/check-mark.png';
 
 function Todos({ item, deleteTodo, clickItem, handleEditTodo }) {
-
     const handleToggleComplete = () => {
         clickItem(item.id);
     };
@@ -44,12 +41,6 @@ function Todos({ item, deleteTodo, clickItem, handleEditTodo }) {
     );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        todos: state.todos,
-    };
-};
-
 const mapDispatchToProps = (dispatch) => {
     return {
         clickItem: (id) => dispatch(clickItem(id)),
@@ -58,4 +49,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Todos);
+export default connect(null, mapDispatchToProps)(Todos);
