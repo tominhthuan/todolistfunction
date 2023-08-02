@@ -1,4 +1,3 @@
-
 import React from 'react';
 import './App.css';
 import { Provider } from 'react-redux';
@@ -14,7 +13,10 @@ function App() {
       <DispatchProvider dispatch={store.dispatch}>
         <div className='App'>
           <Header />
-          <TodoList />
+          <div className='App-container'>
+            <TodoList />
+          </div>
+
           <Footer />
         </div>
       </DispatchProvider>
