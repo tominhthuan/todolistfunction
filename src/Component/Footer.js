@@ -10,7 +10,7 @@ function Footer() {
     };
 
     return (
-        <div>
+        <div className='footer'>
             <button onClick={() => handleFilterChange('all')}>All</button>
             <button onClick={() => handleFilterChange('completed')}>Completed</button>
             <button onClick={() => handleFilterChange('active')}>Active</button>

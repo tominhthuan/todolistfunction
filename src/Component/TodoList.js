@@ -1,32 +1,21 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import Todos from './Todos';
+import useOnScrollNearBottom from '../customhook/useOnScrollNearBottom';
 
 function TodoList() {
     const todos = useSelector((state) => state.todos);
     const filter = useSelector((state) => state.filter);
-
+    const totalTodos = todos.length;
     const itemsPerScroll = 5;
-    const containerRef = useRef(null);
 
-    useEffect(() => {
-        const container = containerRef.current;
-        container.addEventListener('scroll', handleScroll);
-        return () => {
-            container.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
+    const [itemsToShow, setItemsToShow] = React.useState(itemsPerScroll);
 
-    const handleScroll = () => {
-        const container = containerRef.current;
-        const scrollY = container.scrollTop;
-        const containerHeight = container.clientHeight;
-        const contentHeight = container.scrollHeight;
-        const bottom = scrollY + containerHeight >= contentHeight;
-        if (bottom) {
-            setItemsToShow((prevItems) => prevItems + itemsPerScroll);
+    const containerRef = useOnScrollNearBottom(() => {
+        if (itemsToShow < totalTodos) {
+            setItemsToShow((prevItems) => Math.min(prevItems + itemsPerScroll, totalTodos));
         }
-    };
+    });
 
     const filteredTodos = todos.filter((todo) => {
         if (filter === 'completed') {
@@ -38,7 +27,6 @@ function TodoList() {
         }
     });
 
-    const [itemsToShow, setItemsToShow] = React.useState(itemsPerScroll);
     const currentTodos = filteredTodos.slice(0, itemsToShow);
 
     return (
