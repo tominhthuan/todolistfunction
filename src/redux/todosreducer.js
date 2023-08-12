@@ -4,7 +4,8 @@ import { ACTION_TYPE } from './type';
 const todosreducer = (state = [], action) => {
     switch (action.type) {
         case ACTION_TYPE.ADD_TODO:
-            return [...state, action.payload];
+            // return [...state, action.payload];
+            return [{ ...action.payload }, ...state];
         case ACTION_TYPE.UPDATE_TODO: {
             const index = state.findIndex((todo) => todo.id === action.payload.id);
             if (index !== -1) {

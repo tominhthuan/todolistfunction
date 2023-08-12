@@ -4,6 +4,7 @@ const useOnScrollNearBottom = (callback, threshold = 200) => {
     const containerRef = useRef(null);
 
     useEffect(() => {
+        debugger;
         const container = containerRef.current;
         const handleScroll = () => {
             const scrollY = container.scrollTop;

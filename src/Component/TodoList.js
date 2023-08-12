@@ -12,6 +12,7 @@ function TodoList() {
     const [itemsToShow, setItemsToShow] = React.useState(itemsPerScroll);
 
     const containerRef = useOnScrollNearBottom(() => {
+        debugger;
         if (itemsToShow < totalTodos) {
             setItemsToShow((prevItems) => Math.min(prevItems + itemsPerScroll, totalTodos));
         }

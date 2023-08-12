@@ -1,3 +1,6 @@
+*{
+  box-sizing: border-box;
+}
 .App {
   width: 500px;
   margin: 0 auto;
@@ -6,7 +9,7 @@
 }
 
 .Todolists {
-  height: 419px;
+  height: 340px;
   overflow-y: auto;
   margin-top: 10px;
   border:  1px solid #bebebe;
@@ -96,6 +99,6 @@ h1 {
 }
 .footer button{
   margin-right: 20px;
-  padding: 10px 20px;
+  padding: 6px 12px;
   border-radius: 8px;
 }
