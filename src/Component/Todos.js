@@ -24,9 +24,9 @@ function Todos({ item, deleteTodo, clickItem, handleEditTodo }) {
             <div className={`todo ${item.isCompleted ? 'completed' : ''}`}>
                 <button className='ButtonClick' onClick={handleToggleComplete}>
                     {item.isCompleted ? (
-                        <img src={checkMarkImg} width={30} height={30} alt='Completed' />
+                        <img src={checkImg} width={30} height={30} alt='Completed' />
                     ) : (
-                        <img src={checkImg} width={30} height={30} alt='Not Completed' />
+                        <img src={checkMarkImg} width={30} height={30} alt='Not Completed' />
                     )}
                 </button>
                 <h1>{item.name}</h1>

@@ -1,8 +1,7 @@
-// Header.js
 import React, { useState, useRef, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { addTodo, updateTodo } from '../redux/actions';
-import { useDispatch } from '../context/dispatchContext';
+import { useSelector, useDispatch } from 'react-redux';
+import { addTodoApi, updateTodoApi } from '../api';
+import { addTodo, updateTodo, setSelectedTodo } from '../redux/actions';
 
 function Header() {
     const [inputTodo, setInputTodo] = useState('');
@@ -19,12 +18,17 @@ function Header() {
         inputRef.current.focus();
     }, [selectedTodo]);
 
-    const handleAddTodo = () => {
+    const handleAddTodo = async () => {
         if (inputTodo.trim() !== '') {
             if (selectedTodo) {
-                dispatch(updateTodo({ ...selectedTodo, name: inputTodo }));
+                const updatedTodo = { ...selectedTodo, name: inputTodo };
+                await updateTodoApi(updatedTodo);
+                dispatch(updateTodo(updatedTodo));
+                dispatch(setSelectedTodo(null));
             } else {
-                dispatch(addTodo(inputTodo));
+                const newTodo = { name: inputTodo, isCompleted: false };
+                const addedTodo = await addTodoApi(newTodo);
+                dispatch(addTodo(addedTodo));
             }
             setInputTodo('');
             inputRef.current.focus();
