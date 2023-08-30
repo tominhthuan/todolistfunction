@@ -1,22 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { clickItem, deleteTodo, setSelectedTodo } from '../redux/actions';
+import { clickItem, deleteTodo, setSelectedTodo, updateExistingTodo } from '../redux/actions';
+import Notification from './Notification/Notification';
 
 //img
 import checkImg from '../img/checked.png';
 import checkMarkImg from '../img/check-mark.png';
 
-function Todos({ item, deleteTodo, clickItem, handleEditTodo }) {
+function Todos({ item, deleteTodo, setSelectedTodo, updateExistingTodo, clickItem }) {
+    const [editedTodo, setEditedTodo] = useState({ ...item });
+    const [showEditConfirmation, setShowEditConfirmation] = useState(false);
+    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+
     const handleToggleComplete = () => {
         clickItem(item.id);
     };
 
     const handleDeleteTodo = () => {
+        setShowDeleteConfirmation(false);
         deleteTodo(item.id);
     };
 
-    const handleEditClick = () => {
-        handleEditTodo(item);
+    const handleEditTodoClick = () => {
+        setEditedTodo({ ...item });
+        setShowEditConfirmation(true);
+    };
+
+
+
+    const handleConfirmEdit = () => {
+        setSelectedTodo({ ...editedTodo });
+        updateExistingTodo(editedTodo);
+        setShowEditConfirmation(false);
+    };
+
+    const handleCancelEdit = () => {
+        setEditedTodo({ ...item });
+        setShowEditConfirmation(false);
+    };
+
+    const handleDeleteConfirmation = () => {
+        setShowDeleteConfirmation(true);
+    };
+
+    const handleCancelDelete = () => {
+        setShowDeleteConfirmation(false);
     };
 
     return (
@@ -30,12 +58,26 @@ function Todos({ item, deleteTodo, clickItem, handleEditTodo }) {
                     )}
                 </button>
                 <h1>{item.name}</h1>
-                <button className='delete' onClick={handleDeleteTodo}>
+                <button className='delete' onClick={handleDeleteConfirmation}>
                     Delete
                 </button>
-                <button className='edit' onClick={handleEditClick}>
+                <button className='edit' onClick={handleEditTodoClick}>
                     Edit
                 </button>
+                {showEditConfirmation && (
+                    <Notification
+                        message='Bạn có chắc chắn muốn thay đổi công việc này?'
+                        onConfirm={handleConfirmEdit}
+                        onCancel={handleCancelEdit}
+                    />
+                )}
+                {showDeleteConfirmation && (
+                    <Notification
+                        message='Bạn có chắc chắn muốn xóa công việc này?'
+                        onConfirm={handleDeleteTodo}
+                        onCancel={handleCancelDelete}
+                    />
+                )}
             </div>
         </div>
     );
@@ -43,9 +85,10 @@ function Todos({ item, deleteTodo, clickItem, handleEditTodo }) {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        clickItem: (id) => dispatch(clickItem(id)),
         deleteTodo: (id) => dispatch(deleteTodo(id)),
-        handleEditTodo: (todo) => dispatch(setSelectedTodo(todo)),
+        clickItem: (id) => dispatch(clickItem(id)),
+        setSelectedTodo: (todo) => dispatch(setSelectedTodo(todo)),
+        updateExistingTodo: (todo) => dispatch(updateExistingTodo(todo)),
     };
 };
 

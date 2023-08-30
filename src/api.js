@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://64d9d9a2e947d30a260a61c0.mockapi.io/api/todos';
+const API_URL = 'https://64d9d9a2e947d30a260a61c0.mockapi.io/api/Todos';
 
 export const fetchTodos = async () => {
     try {
@@ -28,6 +28,16 @@ export const updateTodoApi = async (updatedTodo) => {
         return response.data;
     } catch (error) {
         console.error('Lỗi khi cập nhật công việc:', error);
+        return null;
+    }
+};
+
+export const deleteTodoApi = async (id) => {
+    try {
+        const response = await axios.delete(`${API_URL}/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error('Lỗi khi xóa công việc:', error);
         return null;
     }
 };

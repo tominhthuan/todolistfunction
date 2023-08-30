@@ -16,11 +16,9 @@ function App() {
           <div className='App-container'>
             <TodoList />
           </div>
-
           <Footer />
         </div>
       </DispatchProvider>
-
     </Provider>
   );
 }

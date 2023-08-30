@@ -22,9 +22,9 @@ function Footer() {
     });
 
     const handleDeleteCompleted = () => {
-        const completedTodos = todos.filter((todo) => todo.isCompleted); // Lọc ra các công việc đã hoàn thành
+        const completedTodos = todos.filter((todo) => todo.isCompleted);
         completedTodos.forEach((todo) => {
-            dispatch(deleteTodo(todo.id)); // Xóa các công việc đã hoàn thành
+            deleteTodo(todo.id);
         });
     };
 

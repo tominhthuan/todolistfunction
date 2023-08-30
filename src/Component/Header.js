@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addTodoApi, updateTodoApi } from '../api';
-import { addTodo, updateTodo, setSelectedTodo } from '../redux/actions';
+import { addTodo, updateExistingTodo, setSelectedTodo } from '../redux/actions';
 
 function Header() {
     const [inputTodo, setInputTodo] = useState('');
@@ -22,9 +22,9 @@ function Header() {
         if (inputTodo.trim() !== '') {
             if (selectedTodo) {
                 const updatedTodo = { ...selectedTodo, name: inputTodo };
-                await updateTodoApi(updatedTodo);
-                dispatch(updateTodo(updatedTodo));
+                dispatch(updateExistingTodo(updatedTodo));
                 dispatch(setSelectedTodo(null));
+                await updateTodoApi(updatedTodo);
             } else {
                 const newTodo = { name: inputTodo, isCompleted: false };
                 const addedTodo = await addTodoApi(newTodo);
