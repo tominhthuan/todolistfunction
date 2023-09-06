@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilter, deleteTodo } from '../redux/actions';
+import { setFilter, clearCompleted } from '../redux/actions';
 
 function Footer() {
     const dispatch = useDispatch();
@@ -22,10 +22,7 @@ function Footer() {
     });
 
     const handleDeleteCompleted = () => {
-        const completedTodos = todos.filter((todo) => todo.isCompleted);
-        completedTodos.forEach((todo) => {
-            deleteTodo(todo.id);
-        });
+        dispatch(clearCompleted());
     };
 
     return (

@@ -27,7 +27,8 @@ const todosreducer = (state = [], action) => {
                 return state;
             }
         }
-
+        case ACTION_TYPE.CLEAR_COMPLETED:
+            return state.filter((todo) => !todo.isCompleted);
         default:
             return state;
     }

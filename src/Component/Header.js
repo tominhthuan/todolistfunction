@@ -19,6 +19,7 @@ function Header() {
     }, [selectedTodo]);
 
     const handleAddTodo = async () => {
+        debugger;
         if (inputTodo.trim() !== '') {
             if (selectedTodo) {
                 const updatedTodo = { ...selectedTodo, name: inputTodo };

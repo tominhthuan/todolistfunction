@@ -22,6 +22,7 @@ function Todos({ item, deleteTodo, setSelectedTodo, updateExistingTodo, clickIte
     };
 
     const handleEditTodoClick = () => {
+        debugger;
         setEditedTodo({ ...item });
         setShowEditConfirmation(true);
     };
@@ -29,6 +30,7 @@ function Todos({ item, deleteTodo, setSelectedTodo, updateExistingTodo, clickIte
 
 
     const handleConfirmEdit = () => {
+        debugger;
         setSelectedTodo({ ...editedTodo });
         updateExistingTodo(editedTodo);
         setShowEditConfirmation(false);

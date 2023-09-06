@@ -23,6 +23,7 @@ export const addTodoApi = async (newTodo) => {
 };
 
 export const updateTodoApi = async (updatedTodo) => {
+    debugger;
     try {
         const response = await axios.put(`${API_URL}/${updatedTodo.id}`, updatedTodo);
         return response.data;
@@ -41,3 +42,13 @@ export const deleteTodoApi = async (id) => {
         return null;
     }
 };
+
+// export const updateFilterApi = async (filterType) => {
+//     try {
+//         const response = await axios.put(API_URL + '/filter', { filterType });
+//         return response.data;
+//     } catch (error) {
+//         console.error('Lỗi khi cập nhật bộ lọc trên server:', error);
+//         return null;
+//     }
+// };
