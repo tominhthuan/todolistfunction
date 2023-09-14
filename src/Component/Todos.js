@@ -1,38 +1,34 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { clickItem, deleteTodo, setSelectedTodo, updateExistingTodo } from '../redux/actions';
+import { clickItemRequest, deleteTodoRequest, setSelectedTodo } from '../redux/actions';
 import Notification from './Notification/Notification';
 
 //img
 import checkImg from '../img/checked.png';
 import checkMarkImg from '../img/check-mark.png';
 
-function Todos({ item, deleteTodo, setSelectedTodo, updateExistingTodo, clickItem }) {
+function Todos({ item, deleteTodoRequest, setSelectedTodo, editTodoRequest, clickItemRequest }) {
     const [editedTodo, setEditedTodo] = useState({ ...item });
     const [showEditConfirmation, setShowEditConfirmation] = useState(false);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
     const handleToggleComplete = () => {
-        clickItem(item.id);
+        clickItemRequest(item);
     };
 
     const handleDeleteTodo = () => {
         setShowDeleteConfirmation(false);
-        deleteTodo(item.id);
+        deleteTodoRequest(item.id);
     };
 
     const handleEditTodoClick = () => {
-        debugger;
         setEditedTodo({ ...item });
         setShowEditConfirmation(true);
     };
 
 
-
     const handleConfirmEdit = () => {
-        debugger;
-        setSelectedTodo({ ...editedTodo });
-        updateExistingTodo(editedTodo);
+        editTodoRequest(editedTodo)
         setShowEditConfirmation(false);
     };
 
@@ -68,7 +64,7 @@ function Todos({ item, deleteTodo, setSelectedTodo, updateExistingTodo, clickIte
                 </button>
                 {showEditConfirmation && (
                     <Notification
-                        message='Bạn có chắc chắn muốn thay đổi công việc này?'
+                        message='Bạn có chắc chắn muốn thay đổi công việc?'
                         onConfirm={handleConfirmEdit}
                         onCancel={handleCancelEdit}
                     />
@@ -87,10 +83,10 @@ function Todos({ item, deleteTodo, setSelectedTodo, updateExistingTodo, clickIte
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        deleteTodo: (id) => dispatch(deleteTodo(id)),
-        clickItem: (id) => dispatch(clickItem(id)),
+        deleteTodoRequest: (id) => dispatch(deleteTodoRequest(id)),
+        clickItemRequest: (itemId) => dispatch(clickItemRequest(itemId)),
         setSelectedTodo: (todo) => dispatch(setSelectedTodo(todo)),
-        updateExistingTodo: (todo) => dispatch(updateExistingTodo(todo)),
+
     };
 };
 

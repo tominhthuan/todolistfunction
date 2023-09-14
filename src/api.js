@@ -11,14 +11,22 @@ export const fetchTodos = async () => {
         return [];
     }
 };
-
 export const addTodoApi = async (newTodo) => {
     try {
-        const response = await axios.post(API_URL, newTodo);
-        return response.data;
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newTodo),
+        });
+        if (!response.ok) {
+            throw new Error('Lỗi khi thêm công việc');
+        }
+        const addedTodo = await response.json();
+        return addedTodo;
     } catch (error) {
-        console.error('Lỗi khi thêm công việc:', error);
-        return null;
+        throw error;
     }
 };
 
@@ -42,13 +50,3 @@ export const deleteTodoApi = async (id) => {
         return null;
     }
 };
-
-// export const updateFilterApi = async (filterType) => {
-//     try {
-//         const response = await axios.put(API_URL + '/filter', { filterType });
-//         return response.data;
-//     } catch (error) {
-//         console.error('Lỗi khi cập nhật bộ lọc trên server:', error);
-//         return null;
-//     }
-// };

@@ -1,31 +1,24 @@
-
 import { ACTION_TYPE } from './type';
 
-const todosreducer = (state = [], action) => {
+const todosReducer = (state = [], action) => {
     switch (action.type) {
-        case 'LOAD_TODOS':
+        case ACTION_TYPE.ADD_TODO_SUCCESS:
+            return [...state, action.payload];
+        case ACTION_TYPE.LOAD_TODOS_SUCCESS:
             return action.payload;
-        case ACTION_TYPE.ADD_TODO:
-            debugger;
-            // return [...state, action.payload];
-            return [{ ...action.payload }, ...state];
-        case ACTION_TYPE.UPDATE_EXISTING_TODO:
+        case ACTION_TYPE.LOAD_TODOS_FAILURE:
+            return state;
+        case ACTION_TYPE.DELETE_TODO_SUCCESS:
+            return state.filter((todo) => todo.id !== action.payload);
+        case ACTION_TYPE.DELETE_TODO_FAILURE:
+            return state;
+        case ACTION_TYPE.CLICK_ITEM_SUCCESS: {
             return state.map((todo) =>
                 todo.id === action.payload.id ? action.payload : todo
             );
-        case ACTION_TYPE.DELETE_TODO:
-            return state.filter((todo) => todo.id !== action.payload);
-        case ACTION_TYPE.CLICK_ITEM: {
-            const index = state.findIndex((todo) => todo.id === action.payload);
-            if (index !== -1) {
-                const updatedTodos = [...state];
-                updatedTodos[index] = {
-                    ...updatedTodos[index],
-                };
-                return updatedTodos;
-            } else {
-                return state;
-            }
+        }
+        case ACTION_TYPE.CLICK_ITEM_FAILURE: {
+            return state;
         }
         case ACTION_TYPE.CLEAR_COMPLETED:
             return state.filter((todo) => !todo.isCompleted);
@@ -34,4 +27,4 @@ const todosreducer = (state = [], action) => {
     }
 };
 
-export default todosreducer;
+export default todosReducer;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Todos from './Todos';
 import useOnScrollNearBottom from '../customhook/useOnScrollNearBottom';
-import { loadTodos } from '../redux/actions';
+import { loadTodosRequest } from '../redux/actions';
 
 
 function TodoList() {
@@ -21,7 +21,7 @@ function TodoList() {
     });
 
     useEffect(() => {
-        dispatch(loadTodos())
+        dispatch(loadTodosRequest())
     }, [dispatch]);
 
     const filteredTodos = todos.filter((todo) => {
