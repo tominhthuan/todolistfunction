@@ -14,15 +14,12 @@ function TodoList() {
 
     const dispatch = useDispatch();
 
+    debugger; //(5)
     const containerRef = useOnScrollNearBottom(() => {
         if (itemsToShow < todos.length) {
             setItemsToShow((prevItems) => Math.min(prevItems + itemsPerScroll, todos.length));
         }
     });
-
-    useEffect(() => {
-        dispatch(loadTodosRequest())
-    }, [dispatch]);
 
     const filteredTodos = todos.filter((todo) => {
         if (filter === 'completed') {
@@ -35,6 +32,11 @@ function TodoList() {
     });
 
     const currentTodos = filteredTodos.slice(0, itemsToShow);
+
+    debugger;//(7)
+    useEffect(() => {
+        dispatch(loadTodosRequest())
+    }, [dispatch]);
 
     return (
         <div ref={containerRef} className='Todolists'>

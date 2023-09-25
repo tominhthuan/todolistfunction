@@ -2,9 +2,8 @@ import { useEffect, useRef } from 'react';
 
 const useOnScrollNearBottom = (callback, threshold = 200) => {
     const containerRef = useRef(null);
-
+    debugger;//(6)
     useEffect(() => {
-        debugger;
         const container = containerRef.current;
         const handleScroll = () => {
             const scrollY = container.scrollTop;

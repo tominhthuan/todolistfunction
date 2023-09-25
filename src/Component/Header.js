@@ -9,26 +9,17 @@ function Header() {
     const inputRef = useRef(null);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        if (selectedTodo) {
-            setInputTodo(selectedTodo.name);
-        } else {
-            setInputTodo('');
-        }
-        inputRef.current.focus();
-    }, [selectedTodo]);
-
+    debugger; //(3)
     const handleAddTodo = async () => {
+        debugger;
         if (inputTodo.trim() !== '') {
             if (selectedTodo) {
                 const updatedTodo = { ...selectedTodo, name: inputTodo };
-                dispatch(updateExistingTodo(updatedTodo));
+                dispatch(editTodoRequest(updatedTodo));
                 dispatch(setSelectedTodo(null));
-                await updateTodoApi(updatedTodo);
             } else {
                 const newTodo = { name: inputTodo, isCompleted: false };
                 dispatch(addTodoRequest(newTodo));
-                setInputTodo('')
             }
             setInputTodo('');
             inputRef.current.focus();
@@ -38,6 +29,16 @@ function Header() {
     const handleInputChange = (e) => {
         setInputTodo(e.target.value);
     };
+
+    debugger;//(4)
+    useEffect(() => {
+        if (selectedTodo) {
+            setInputTodo(selectedTodo.name);
+        } else {
+            setInputTodo('');
+        }
+        inputRef.current.focus();
+    }, [selectedTodo]);
 
     return (
         <div className='header'>

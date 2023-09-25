@@ -7,6 +7,7 @@ export function useDispatch() {
 }
 
 export function DispatchProvider({ children, dispatch }) {
+    debugger;// (2)
     return (
         <DispatchContext.Provider value={dispatch}>
             {children}

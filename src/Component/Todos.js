@@ -12,6 +12,7 @@ function Todos({ item, deleteTodoRequest, setSelectedTodo, editTodoRequest, clic
     const [showEditConfirmation, setShowEditConfirmation] = useState(false);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
+    debugger;//(0)
     const handleToggleComplete = () => {
         clickItemRequest(item);
     };
@@ -22,13 +23,12 @@ function Todos({ item, deleteTodoRequest, setSelectedTodo, editTodoRequest, clic
     };
 
     const handleEditTodoClick = () => {
-        setEditedTodo({ ...item });
         setShowEditConfirmation(true);
     };
 
 
     const handleConfirmEdit = () => {
-        editTodoRequest(editedTodo)
+        setSelectedTodo(item);
         setShowEditConfirmation(false);
     };
 
